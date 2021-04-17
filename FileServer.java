@@ -10,6 +10,8 @@ public class FileServer extends Server{
    public static final int MAX_USERS = 4000;
    
    //Constructors
+   public FileServer(){
+   }
    public FileServer(String serverID, String os, double capacity, int numUsers){
       super(serverID, os, capacity);
       setNumUsers(numUsers);

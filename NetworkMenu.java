@@ -20,42 +20,78 @@ public class NetworkMenu{
    
    //Add Server
    public static void addServer(Server[] network){
-      String serverType = userString("Enter choice for server type to create\n\n"
+	   String serverID ="";
+	      //Initializing an empty server
+	      Server tempServer = null;
+	      boolean correct = true;
+	      int intServerType =0;
+	      String serverType ="";
+	  do {
+         serverType = userString("Enter choice for server type to create\n\n"
          +"[1] WebServer\n"
          +"[2] FileServer\n"
          +"[3] DatabaseServer\n"
          +"[0] Cancel");
-         
-      String serverID = "";
+      //parsing String to int
+    	  try {
+    	  intServerType = Integer.parseInt(serverType);
+    	  }catch(NumberFormatException e) {
+    		  correct = false;
+       	   	  JOptionPane.showMessageDialog(null, "Must enter an integer");
+    	  }  
+      switch(intServerType) {
+      case 1:
+    	  tempServer = new WebServer();
+    	  break;
+      case 2:
+    	  tempServer= new FileServer();
+    	  break;
+      case 3:
+    	  tempServer = new DatabaseServer();
+    	  break;
+      default:
+    	   JOptionPane.showMessageDialog(null, "Must choose a number between 1 and 3");
+    	   correct = false;
+      }
+	  }
+      while(correct == false && tempServer !=null);
+
       String os = userString("Choose Server Operating System\n\n"
          +"[1] - Windows\n"
          +"[2] - Linux\n"
          +"[3] - OS X");
       switch(os){
          case "1":
-            os = "WINDOWS";
+            tempServer.setOS("WINDOWS");
             break;
          case "2":
-            os = "LINUX";
+            tempServer.setOS("LINUX");
             break;
          case "3":
-            os = "OS X";
+            tempServer.setOS("OS X");
             break;
+         default:
+        	 throw new IllegalArgumentException("Must enter a valid input for menu");
       }
       double capacity = userDouble("Enter Server hard drive capacity (TB)");
+      tempServer.setCapacity(capacity);
       
       switch(serverType){
          case "1":
-            serverID = "WS" + String.format("%03d", WebServer.getNumWS()+1);
-            
+            tempServer.setServerID("WS" + String.format("%03d", WebServer.getNumWS()+1));
             int numLangs = userInt("Enter number of programming languages to create for WebServer (2-4)");
+            //down casting to make sure we have the correct object
+            if(tempServer instanceof WebServer) {
+            ((WebServer)tempServer).setNumLangs(numLangs);
             String[] langs = new String[numLangs];
             for(int i = 0; i < numLangs; i++){
                langs[i] = userString("Enter programming language");
+            }      
+            ((WebServer) tempServer).setLangs(langs);
+            network[Server.getNumServers()-1] = tempServer;
             }
-            Server ws = new WebServer(serverID, os, capacity, numLangs, langs);
-            network[Server.getNumServers()-1] = ws;
             break;
+            
          case "2":
             serverID = "FS" + String.format("%03d", FileServer.getNumFS()+1);
             
@@ -169,8 +205,7 @@ public class NetworkMenu{
    }
    
    public static void main(String[] args){
-      final int MAX_SERVERS = 250;
-      Server[] network = new Server[MAX_SERVERS];
+      Server[] network = new Server[Server.MAX_SERVERS];
       boolean repeat = true;
       
       do{
