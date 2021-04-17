@@ -1,5 +1,6 @@
 public abstract class Server{
    //Instance Variables
+   public static final int MAX_SERVERS = 500; // you dont want the user to change this
    private String serverID;
    private String os;
    private double capacity;
@@ -16,6 +17,12 @@ public abstract class Server{
    public static final int ID_CHAR = 5;
    
    //Constructors
+   /*Since there is no restrictions on how a server is created
+    * a default constructor can be implemented to initialized a server
+    * with default values: 0.0 for doubles, null for Strings and objects*/
+   public Server() {
+	   numServers++;
+   }
    public Server(String serverID, String os, double capacity){
       setServerID(serverID);
       setOS(os);

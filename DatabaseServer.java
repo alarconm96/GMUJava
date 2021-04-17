@@ -13,6 +13,8 @@ public class DatabaseServer extends Server{
    public static final double USAGE_RATE = 0.05;
    
    //Constructor
+   public DatabaseServer(){
+   }
    public DatabaseServer(String serverID, String os, double capacity, String app, int numUsers){
       super(serverID, os, capacity);
       setApp(app);

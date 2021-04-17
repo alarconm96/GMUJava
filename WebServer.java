@@ -12,6 +12,8 @@ public class WebServer extends Server{
    public static final int MAX_LANGS = 4;
    
    //Constructor
+   public WebServer() {
+   }
    public WebServer(String serverID, String os, double capacity, int numLangs, String[] langs){
       super(serverID, os, capacity);
       setNumLangs(numLangs);
