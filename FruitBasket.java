@@ -1,3 +1,4 @@
+//Practicing Information Hiding with Array Instance Variables
 public class FruitBasket{
    private String name;
    private Fruit[] basket;
