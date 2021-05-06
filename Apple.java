@@ -6,7 +6,6 @@ public class Apple extends Fruit{
    }
    public Apple(String name){
       setName(name);
-      System.out.println("Apple object created!");
    }
    
    public String getName(){
@@ -19,7 +18,9 @@ public class Apple extends Fruit{
       }
       this.name = name;
    }
-   
+   public String fruitMsg(){
+	      return "THIS IS AN APPLE TALKING!";
+   }
    public String toString(){
       return String.format("Fruit type: %s%nFruit name: %s%n", 
       this.getClass().getName(), 
