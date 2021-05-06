@@ -14,10 +14,11 @@ public class Apple extends Fruit{
    
    public void setName(String name){
       if(name == null || name.equals("")){
-         throw new IllegalArgumentException("Apple name cannot be null");
+         throw new FruitNameException("Apple name cannot be null");
       }
       this.name = name;
    }
+	
    public String fruitMsg(){
 	      return "THIS IS AN APPLE TALKING!";
    }
