@@ -15,7 +15,7 @@ public class Fruit{
    
    public void setName(String name){
       if(name == null || name.equals("")){
-         throw new IllegalArgumentException("Fruit name cannot be null");
+         throw new FruitNameException("Fruit name cannot be null");
       }
       this.name = name;
    }
